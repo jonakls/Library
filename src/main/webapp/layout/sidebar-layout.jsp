@@ -1,3 +1,5 @@
+<%@ page import="top.jonakls.library.entity.object.BookEntity" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
@@ -5,6 +7,9 @@
     <jsp:include page="../util/extra-libs.jsp"/>
 </head>
 <body>
+<%
+    int userRole = session.getAttribute("userRole") == null ? 0 : (int) session.getAttribute("userRole");
+%>
 
 <!-- Sidebar Start -->
 <aside class="left-sidebar">
@@ -38,88 +43,41 @@
                     <span class="hide-menu">Biblioteca</span>
                 </li>
                 <li class="sidebar-item">
-                    <a aria-expanded="false" class="sidebar-link" href="<%=request.getContextPath()%>/ui-buttons.html">
+                    <a aria-expanded="false" class="sidebar-link"
+                       href="<%=request.getContextPath()%>/book/book-table.jsp">
                 <span>
                   <i class="ti ti-article"></i>
                 </span>
-                        <span class="hide-menu">Buttons</span>
+                        <span class="hide-menu">Libros</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a aria-expanded="false" class="sidebar-link" href="<%=request.getContextPath()%>/ui-alerts.html">
+                    <a aria-expanded="false" class="sidebar-link"
+                       href="<%=request.getContextPath()%>/loan/loan-table.jsp">
                 <span>
                   <i class="ti ti-alert-circle"></i>
                 </span>
-                        <span class="hide-menu">Alerts</span>
+                        <span class="hide-menu">Prestamos</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a aria-expanded="false" class="sidebar-link" href="<%=request.getContextPath()%>/ui-card.html">
-                <span>
-                  <i class="ti ti-cards"></i>
-                </span>
-                        <span class="hide-menu">Card</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a aria-expanded="false" class="sidebar-link" href="<%=request.getContextPath()%>/template-forms.jsp">
-                <span>
-                  <i class="ti ti-file-description"></i>
-                </span>
-                        <span class="hide-menu">Forms</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a aria-expanded="false" class="sidebar-link"
-                       href="<%=request.getContextPath()%>/ui-typography.html">
-                <span>
-                  <i class="ti ti-typography"></i>
-                </span>
-                        <span class="hide-menu">Typography</span>
-                    </a>
-                </li>
+                
+                <% if (userRole == 1) { %>
                 <li class="nav-small-cap">
                     <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">AUTH</span>
+                    <span class="hide-menu">Administración</span>
                 </li>
+                
                 <li class="sidebar-item">
                     <a aria-expanded="false" class="sidebar-link"
-                       href="<%=request.getContextPath()%>/authentication-login.jsp">
+                       href="<%=request.getContextPath()%>/user/user-table.jsp">
                 <span>
-                  <i class="ti ti-login"></i>
+                  <i class="ti ti-article"></i>
                 </span>
-                        <span class="hide-menu">Login</span>
+                        <span class="hide-menu">Usuarios</span>
                     </a>
                 </li>
-                <li class="sidebar-item">
-                    <a aria-expanded="false" class="sidebar-link"
-                       href="<%=request.getContextPath()%>/authentication-register.jsp">
-                <span>
-                  <i class="ti ti-user-plus"></i>
-                </span>
-                        <span class="hide-menu">Register</span>
-                    </a>
-                </li>
-                <li class="nav-small-cap">
-                    <i class="ti ti-dots nav-small-cap-icon fs-4"></i>
-                    <span class="hide-menu">EXTRA</span>
-                </li>
-                <li class="sidebar-item">
-                    <a aria-expanded="false" class="sidebar-link" href="<%=request.getContextPath()%>/icon-tabler.html">
-                <span>
-                  <i class="ti ti-mood-happy"></i>
-                </span>
-                        <span class="hide-menu">Icons</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a aria-expanded="false" class="sidebar-link" href="<%=request.getContextPath()%>/template-page.jsp">
-                <span>
-                  <i class="ti ti-aperture"></i>
-                </span>
-                        <span class="hide-menu">Sample Page</span>
-                    </a>
-                </li>
+                <% } %>
+            
             </ul>
         </nav>
         <!-- End Sidebar navigation -->
