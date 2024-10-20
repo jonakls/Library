@@ -16,17 +16,17 @@ public class LoanEntity implements ObjectEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     @OneToOne(targetEntity = UserEntity.class)
-    private int userId;
+    private UserEntity user;
     @OneToOne(targetEntity = BookEntity.class)
-    private int bookId;
+    private BookEntity book;
     private String loanDate;
     private String returnDate;
     private String status;
 
-    public LoanEntity(int id, int userId, int bookId, String loanDate, String returnDate, String status) {
+    public LoanEntity(int id, UserEntity user, BookEntity book, String loanDate, String returnDate, String status) {
         this.id = id;
-        this.userId = userId;
-        this.bookId = bookId;
+        this.user = user;
+        this.book = book;
         this.loanDate = loanDate;
         this.returnDate = returnDate;
         this.status = status;
@@ -40,20 +40,20 @@ public class LoanEntity implements ObjectEntity {
         return this.id;
     }
 
-    public int getUserId() {
-        return this.userId;
+    public UserEntity getUser() {
+        return this.user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(UserEntity userId) {
+        this.user = userId;
     }
 
-    public int getBookId() {
-        return this.bookId;
+    public BookEntity getBook() {
+        return this.book;
     }
 
-    public void setBookId(int bookId) {
-        this.bookId = bookId;
+    public void setBook(BookEntity bookId) {
+        this.book = bookId;
     }
 
     public String getLoanDate() {

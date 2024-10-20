@@ -16,7 +16,6 @@
 <%@include file="../util/session-util.jsp" %>
 <%
     final String errorParam = request.getParameter("error");
-    
     if (errorParam != null) {
         String errorMessage = session.getAttribute("errorMessage") != null ? (String) session.getAttribute("errorMessage") : "Error desconocido";
         session.removeAttribute("errorMessage");
@@ -41,6 +40,7 @@
     final BookPersistenceController bookPersistenceController = new BookPersistenceController();
     final List<BookEntity> books = bookPersistenceController.findAllBooks();
     final int userRole = (int) session.getAttribute("userRole");
+    final int userId = (int) session.getAttribute("userId");
 %>
 
 <!--  Body Wrapper -->
@@ -62,52 +62,72 @@
                     <h5 class="card-title fw-semibold mb-4">Libros</h5>
                     <p class="mb-0">Libros disponibles o ocupados</p>
                     
-                    <table class="table table-striped" id="template-table">
-                        <thead>
+                    <table class="table table-striped text-nowrap mb-0 align-middle" id="template-table">
+                        <thead class="text-dark fs-4">
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Titulo</th>
-                            <th scope="col">Autor</th>
-                            <th scope="col">Genero</th>
-                            <th scope="col">Año</th>
-                            <th scope="col">Disponibilidad</th>
-                            <th scope="col">Acciones</th>
+                            <th class="border-bottom-0" scope="col">#</th>
+                            <th class="border-bottom-0" scope="col">Titulo</th>
+                            <th class="border-bottom-0" scope="col">Autor</th>
+                            <th class="border-bottom-0" scope="col">Genero</th>
+                            <th class="border-bottom-0" scope="col">Año</th>
+                            <th class="border-bottom-0" scope="col">Disponibilidad</th>
+                            <th class="border-bottom-0" scope="col">Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
                         <% for (BookEntity book : books) { %>
                         <tr>
-                            <th scope="row"><%= book.getId() %>
+                            <th class="border-bottom-0" scope="row"><%= book.getId() %>
                             </th>
-                            <td><%= book.getTitle() %>
+                            <td class="border-bottom-0"><%= book.getTitle() %>
                             </td>
-                            <td><%= book.getAuthor() %>
+                            <td class="border-bottom-0"><%= book.getAuthor() %>
                             </td>
-                            <td><%= book.getGenre() %>
+                            <td class="border-bottom-0"><%= book.getGenre() %>
                             </td>
-                            <td><%= book.getYear() %>
+                            <td class="border-bottom-0"><%= book.getYear() %>
                             </td>
-                            <td><%= book.getAvailability() %>
+                            <td class="border-bottom-0"><%= book.getAvailability() %>
                             </td>
-                            <td>
+                            <td class="border-bottom-0">
                                 <%
                                     switch (userRole) {
                                         case 3:
                                 %>
-                                <a href="book-edit.jsp?id=<%= book.getId() %>" class="btn btn-primary">Reservar</a>
+                                <form action="${pageContext.request.contextPath}/loan/reserve" method="post">
+                                    <input type="hidden" name="bookId" value="<%= book.getId() %>">
+                                    <input type="hidden" name="userId" value="<%= userId %>">
+                                    <button class="btn btn-primary">Reservar</button>
+                                </form>
                                 <%
                                         break;
                                     case 2:
                                 %>
-                                <a href="book-edit.jsp?id=<%= book.getId() %>" class="btn btn-primary">Reservar</a>
-                                <a href="book-edit.jsp?id=<%= book.getId() %>" class="btn btn-primary">Editar</a>
+                                <form action="${pageContext.request.contextPath}/loan/reserve" method="post">
+                                    <input type="hidden" name="bookId" value="<%= book.getId() %>">
+                                    <input type="hidden" name="userId" value="<%= userId %>">
+                                    <button class="btn btn-primary">Reservar</button>
+                                </form>
+                                <form action="${pageContext.request.contextPath}/book/edit" method="post">
+                                    <input type="hidden" name="bookId" value="<%= book.getId() %>">
+                                    <button class="btn btn-primary">Editar</button>
+                                </form>
                                 <%
                                         break;
                                     case 1:
                                 %>
-                                <a href="book-edit.jsp?id=<%= book.getId() %>" class="btn btn-primary">Reservar</a>
-                                <a href="book-edit.jsp?id=<%= book.getId() %>" class="btn btn-primary">Editar</a>
-                                <a href="book-delete.jsp?id=<%= book.getId() %>" class="btn btn-danger">Eliminar</a>
+                                <form action="${pageContext.request.contextPath}/loan/reserve" method="post">
+                                    <input type="hidden" name="bookId" value="<%= book.getId() %>">
+                                    <input type="hidden" name="userId" value="<%= userId %>">
+                                    <button class="btn btn-primary">Reservar</button>
+                                </form>
+                                <form action="${pageContext.request.contextPath}/book/edit" method="post">
+                                    <input type="hidden" name="bookId" value="<%= book.getId() %>">
+                                    <button class="btn btn-primary">Editar</button>
+                                </form>
+                                <form action="${pageContext.request.contextPath}/book/remove" method="post">
+                                    <button class="btn btn-danger">Eliminar</button>
+                                </form>
                                 <% break;
                                 }
                                 %>

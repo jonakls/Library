@@ -27,6 +27,7 @@ public class BookAddServlet extends HttpServlet {
         bookEntity.setAuthor(author);
         bookEntity.setYear(year);
         bookEntity.setGenre(genre);
+        bookEntity.setAvailability("Disponible");
 
         if (bookPersistenceController.save(bookEntity)) {
             resp.sendRedirect(req.getContextPath() + "/book/book-table.jsp?success=0");

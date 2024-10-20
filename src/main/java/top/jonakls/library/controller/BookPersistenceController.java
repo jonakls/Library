@@ -3,6 +3,7 @@ package top.jonakls.library.controller;
 import top.jonakls.library.entity.object.BookEntity;
 import top.jonakls.library.persistence.ObjectJpaPersistence;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 public class BookPersistenceController {
@@ -39,6 +40,19 @@ public class BookPersistenceController {
 
     public List<BookEntity> findAllBooks() {
         return BOOK_PERSISTENCE.findAll();
+    }
+
+    public List<BookEntity> findRecentlyBooks() {
+        EntityManager em = BOOK_PERSISTENCE.getEntityManager();
+        try {
+            return em.createQuery("SELECT b FROM BookEntity b ORDER BY b.year DESC", BookEntity.class)
+                    .setMaxResults(5)
+                    .getResultList();
+        } catch (Exception e) {
+            return null;
+        } finally {
+            em.close();
+        }
     }
 
 

@@ -5,6 +5,7 @@ import top.jonakls.library.entity.ObjectEntity;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.servlet.ServletContext;
 import java.util.List;
 
 public class ObjectJpaPersistence<T extends ObjectEntity> {
@@ -85,6 +86,7 @@ public class ObjectJpaPersistence<T extends ObjectEntity> {
      */
     public T findObjectByField(String fieldName, Object value) {
         EntityManager em = getEntityManager();
+
         try {
             return em.createQuery("SELECT o FROM " + clazz.getSimpleName() + " o WHERE o." + fieldName + " = :value", clazz)
                     .setParameter("value", value)

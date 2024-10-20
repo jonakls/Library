@@ -11,6 +11,7 @@
     } else {
         final int userRole = user.getRole() == 0 ? 3 : user.getRole();
         mySession.setAttribute("userRole", userRole);
+        mySession.setAttribute("userId", user.getId());
     }
-    
+
 %>

@@ -29,30 +29,29 @@
                     <p class="mb-0">This
                         is a sample page with a table of data</p>
                     
-                    <table class="table table-striped" id="template-table">
-                        <thead>
+                    <table class="table table-striped text-nowrap mb-0 align-middle" id="template-table">
+                        <thead class="text-dark fs-4">
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Segundo nombre</th>
-                            <th scope="col">Nick</th>
+                            <th class="border-bottom-0" scope="col">#</th>
+                            <th class="border-bottom-0" scope="col">Nombre</th>
+                            <th class="border-bottom-0" scope="col">Segundo nombre</th>
+                            <th class="border-bottom-0" scope="col">Nick</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <th class="border-bottom-0" scope="row">1</th>
+                            <td class="border-bottom-0">Mark</td>
+                            <td class="border-bottom-0">Otto</td>
+                            <td class="border-bottom-0">@mdo</td>
                         </tr>
                         <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
+                            <th class="border-bottom-0" scope="row">2</th>
+                            <td class="border-bottom-0">Jacob</td>
+                            <td class="border-bottom-0">Thornton</td>
+                            <td class="border-bottom-0">@fat</td>
                         </tr>
                         </tbody>
-                    
                     </table>
                 
                 </div>

@@ -40,28 +40,28 @@
                     <h5 class="card-title fw-semibold mb-4">Tabla de usuarios</h5>
                     <p class="mb-0">Tabla de caracter administrativa de usuarios</p>
                     
-                    <table class="table table-striped" id="template-table">
-                        <thead>
+                    <table class="table table-striped text-nowrap mb-0 align-middle" id="template-table">
+                        <thead class="text-dark fs-4">
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nombre completo</th>
-                            <th scope="col">Correo</th>
-                            <th scope="col">Rol</th>
-                            <th scope="col">Acciones</th>
+                            <th class="border-bottom-0" scope="col">#</th>
+                            <th class="border-bottom-0" scope="col">Nombre completo</th>
+                            <th class="border-bottom-0" scope="col">Correo</th>
+                            <th class="border-bottom-0" scope="col">Rol</th>
+                            <th class="border-bottom-0" scope="col">Acciones</th>
                         </tr>
                         </thead>
                         <tbody>
                         <% for (UserEntity cachedUser : users) { %>
                         <tr>
-                            <th scope="row"><%=cachedUser.getId()%>
+                            <th class="border-bottom-0" scope="row"><%=cachedUser.getId()%>
                             </th>
-                            <td><%=cachedUser.getName() + " " + cachedUser.getSecondName()%>
+                            <td class="border-bottom-0"><%=cachedUser.getName() + " " + cachedUser.getSecondName()%>
                             </td>
-                            <td><%=cachedUser.getEmail()%>
+                            <td class="border-bottom-0"><%=cachedUser.getEmail()%>
                             </td>
-                            <td><%=RoleUtil.getRoleByInt(cachedUser.getRole()).getRoleName()%>
+                            <td class="border-bottom-0"><%=RoleUtil.getRoleByInt(cachedUser.getRole()).getRoleName()%>
                             </td>
-                            <td>
+                            <td class="border-bottom-0">
                                 <a href="<%=request.getContextPath()%>/user/edit?id=<%=cachedUser.getId()%>"
                                    class="btn btn-primary">Editar</a>
                                 <a href="<%=request.getContextPath()%>/user/delete?id=<%=cachedUser.getId()%>"

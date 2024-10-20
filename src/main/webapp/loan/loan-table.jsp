@@ -1,14 +1,24 @@
+<%@ page import="top.jonakls.library.controller.LoanPersistenceController" %>
+<%@ page import="top.jonakls.library.entity.object.LoanEntity" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <!doctype html>
 <html lang="es">
 
 <head>
-    <title>Biblioteca | Template basica</title>
+    <title>Biblioteca | Lista de reservas</title>
 </head>
 
 <body>
 <%@include file="../util/extra-libs.jsp" %>
 <%@include file="../util/session-util.jsp" %>
+
+<%
+    final LoanPersistenceController loanPersistenceController = new LoanPersistenceController();
+    final List<LoanEntity> loans = loanPersistenceController.getAllLoans();
+
+
+%>
 <!--  Body Wrapper -->
 <div class="page-wrapper" data-header-position="fixed" data-layout="vertical" data-navbarbg="skin6"
      data-sidebar-position="fixed"
@@ -29,30 +39,29 @@
                     <p class="mb-0">This
                         is a sample page with a table of data</p>
                     
-                    <table class="table table-striped" id="template-table">
-                        <thead>
+                    <table class="table table-striped text-nowrap mb-0 align-middle" id="template-table">
+                        <thead class="text-dark fs-4">
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Segundo nombre</th>
-                            <th scope="col">Nick</th>
+                            <th class="border-bottom-0" scope="col">#</th>
+                            <th class="border-bottom-0" scope="col">Libro</th>
+                            <th class="border-bottom-0" scope="col">Usuario</th>
+                            <th class="border-bottom-0" scope="col">Estado</th>
                         </tr>
                         </thead>
                         <tbody>
+                        <% for (final LoanEntity loan : loans) { %>
                         <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
+                            <th class="border-bottom-0" scope="row"><%=loan.getId()%>
+                            </th>
+                            <td class="border-bottom-0"><%=loan.getBook().getTitle()%>
+                            </td>
+                            <td class="border-bottom-0"><%=loan.getUser().getName() + " " + loan.getUser().getSecondName()%>
+                            </td>
+                            <td class="border-bottom-0"><%=loan.getStatus()%>
+                            </td>
                         </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
+                        <% } %>
                         </tbody>
-                    
                     </table>
                 
                 </div>
